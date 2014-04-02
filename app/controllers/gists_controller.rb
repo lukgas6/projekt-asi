@@ -4,7 +4,7 @@ class GistsController < ApplicationController
   # GET /gists
   # GET /gists.json
   def index
-    @gists = Gist.paginate(:page => params[:page], :per_page => 10)
+    @gists = Gist.paginate(:page => params[:page], :per_page => 5, :conditions => ['snippet LIKE ? AND description LIKE ? AND lang LIKE ?', "%#{params[:search_snippet]}%", "%#{params[:search_description]}%", "%#{params[:search_language]}%"])
     @gist = Gist.new
     respond_to do |format|
       format.html

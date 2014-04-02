@@ -4,6 +4,23 @@
         <p class="text-right">
             <a class="btn btn-success btn-lg" href="/gists/new">Create new gist</a>
         </p>
+        <%= form_tag @gist, :method => 'get' do %>
+            <fieldset>
+                <legend>Filter gists</legend>
+                <div class="form-group">
+                    <%= text_field_tag :search_snippet, params[:search_snippet], class: "form-control", placeholder: "Search in snippet..." %>
+                </div>
+                <div class="form-group">
+                    <%= text_field_tag :search_description, params[:search_description], class: "form-control", placeholder: "Search in description..." %>
+                </div>
+                <div class="form-group">
+                    <%= select_tag :search_language, options_for_select(Pygments.lexers.keys.sort.zip(Pygments.lexers.keys.sort.map! {|l| l.downcase.strip})), include_blank: true, class: "form-control" %>
+                </div>
+                <div class="form-group">
+                    <%= submit_tag "Filter", :type => "submit", class: "btn btn-info" %>
+                </div>
+            </fieldset>
+        <% end %>
     </div>
   <%= will_paginate %>
   <div class="row" id="gists">
