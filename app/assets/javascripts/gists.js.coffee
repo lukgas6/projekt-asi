@@ -14,7 +14,7 @@ jQuery ->
     return
 
 $(document).ready ->
-  $(".snippet-small").click ->
+  $("#gists").on "click", ".snippet-small", ->
     $(this).siblings(".snippet-full").show()
     $(this).siblings(".snippet").hide()
     $(this).hide()
