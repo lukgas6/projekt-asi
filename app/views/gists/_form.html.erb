@@ -1,0 +1,30 @@
+<%= form_for @gist do |f| %>
+    <div class="alert alert-info fade in gist">
+        <div class="col-md-12">
+            <% if @gist.errors.any? %>
+                <div class="alert alert-danger">
+                    <h3>Please correct following errors:</h3>
+                    <% @gist.errors.full_messages.each do |msg| %>
+                        <p><%= msg %></p>
+                    <% end %>
+                </div>
+            <% end %>
+            <div class="form-group">
+                <label for="snippet">Snippet:</label>
+                <%= f.text_area :snippet, rows: 12, class: "form-control", placeholder: "Enter code here..." %>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <%= f.text_field :description, maxlength: 80, class: "form-control", placeholder: "Gist description" %>
+            </div>
+            <div class="form-group">
+                <label for="description">Language:</label>
+                <%= f.select :lang, Pygments.lexers.keys.sort.zip(Pygments.lexers.keys.sort.map! {|l| l.downcase.strip}), {}, class: "form-control" %>
+            </div>
+            <div class="form-group">
+                <a href="/gists" class="btn btn-default">Cancel</a>
+                <%= f.submit "Save", class: "btn btn-primary" %>
+            </div>
+        </div>
+    </div>
+<% end %>

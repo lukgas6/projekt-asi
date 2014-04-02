@@ -1,0 +1,23 @@
+<div class="alert alert-info fade in gist">
+    <a class="btn btn-warning pull-right" rel="nofollow" href="/gists/<%= gist.id %>" data-method="delete" data-confirm="Really delete?">Delete</a>
+    <p><%=image_tag("gist_icon.png", alt: "Gist icon")%> <%= gist.description %></p>
+      <div class="gist-contents">
+        <p class="text-left"><b><%= gist.lang %></b> snippet:</p>
+        <% if gist.snippet.lines.count > 4 %>
+            <div class="snippet-small">
+              <%= raw Pygments.highlight((gist.snippet.lines.take(4).join + "..."), lexer: gist.lang) %>
+            </div>
+            <div class="snippet-full">
+                <%= raw Pygments.highlight(gist.snippet, lexer: gist.lang) %>
+            </div>
+            <span class="snippet-show-full">(click to show <%= (gist.snippet.lines.count - 4).to_s %> more lines)</span>
+        <% else %>
+            <div class="snippet">
+              <%= raw Pygments.highlight(gist.snippet, lexer: gist.lang) %>
+            </div>
+        <% end %>
+    </div>
+    <p class="text-right">
+        <%= link_to 'Edit this gist', edit_gist_path(gist), class: "btn btn-primary" %>
+    </p>
+</div>
