@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label for="description">Language:</label>
-                <%= f.select :lang, Pygments.lexers.keys.sort.zip(Pygments.lexers.keys.sort.map! {|l| l.downcase.strip}), {}, class: "form-control" %>
+                <%= f.select :lang, Pygments.lexers.sort.map{|key, value| [ value[:name], value[:aliases][0] ] }, {}, class: "form-control" %>
             </div>
             <div class="form-group">
                 <a href="/gists" class="btn btn-default">Cancel</a>
